@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "Pluto Bold";
+    src: url("PlutoBold.otf");
+  }
+@font-face {
+    font-family: "Isidora";
+    src: url("IsidoraSansAlt-Thin.ttf");
+  }
+.p{
+    font-family: "Pluto Bold";
+}
+.i{
+  font-family: "Isidora";
+}

@@ -1,0 +1,112 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'alpinaApp/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'alpinaApp/css/principal.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cervello</title>
+    <link rel="icon" type="image/png" href="{% static 'alpinaApp/img/logo_alpina.png'%}" />
+  </head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-primary">
+        <a href="#" class="navbar">
+            <img src="{% static 'alpinaApp/img/logo_alpina.png'%}" height="45" alt="CoolBrand">
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="{% url 'principal' %}" class="nav-item nav-link ">Inicio</a>
+                <a href="{% url 'informe_produccion' %}" class="nav-item nav-link">Producción</a>
+                <a href="{% url 'donaciones' %}" class="nav-item nav-link">Donaciones</a>
+                <a href="https://www.alpina.com/recetas/recetas-alpina" class="nav-item nav-link">Tiendas Alpina</a>
+                <a href="https://www.alpina.com/tiendas-alpina/la-cabana-alpina" class="nav-item nav-link">Empleos</a>
+                <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a href="#" class="nav-item nav-link">Contacto</a>
+                <a href="{% url 'salida' %}" class="nav-item nav-link">Salir</a>
+            </div>
+        </div>
+    </nav>
+<div class="container-fluid text-center p-2 i ip bg-light mt-3 ">
+    <h1 class="i ip">
+        Hola, {{request.user}}, ¡Bienvenida a la plataforma de control de producción Alpina!
+    </h1>
+</div>
+
+
+  <div class="container-fluid pt-2 pl-4 ">
+    <hr>    
+    <div class="row">
+        <div class="col-4 mt-4 text-center">
+           <p>
+            <img src="{% static 'alpinaApp/img/alpina70años.jpg'%}" height="250" alt="CoolBrand" >
+           </p> 
+           <a class="btn btn-primary pt-3 pb-3 ml-4 i ip" href="{% url 'historial' %}" role="button">Historial</a> 
+        </div>
+        <div class="col-4 i ip mt-5 text-center">
+            ¿Tienes una iniciativa innovadora?
+            Sumérgete en una experiencia diferente
+            En la segunda edición de nuestra convocatoria de innovación, DemoDay, podrás presentar tu iniciativa, potenciar tus habilidades,
+            acceder al acompañamiento de mentores y tener la posibilidad de que el proyecto que sueñas para Alpina pueda volverse realidad.
+        </div>
+        <div class="col-4 text-center "    >
+            <div class="container fluid border border-primary mt-5"> 
+                <h4 class="container-fluid text-center p-2 mt-5 bg-primary i ip btn-primary ">
+                    Búsqueda de Producto
+                </h4>
+                <form action="" method="POST">
+                {% csrf_token %} 
+                    <div class="form-group "> <!-- Zip Code-->
+                        <label for="zip_id" class="control-label">Código Producto</label>
+                        <input type="text" class="form-control i ip" id="code" name="codigo" placeholder="Código">
+                     </div>
+                     <div class="form-group"> <!-- Submit Button -->
+                        <button type="submit" name="Buscar" class="btn btn-primary">Buscar</button>
+                </div> 
+                </form>
+                {% for message in messages %}
+                <p class="container-fluid " id="messages">{{message}}
+                {% endfor %}
+        </div>
+    </div>
+    <hr>
+    <div class="row">  
+        <div class="col-8 mt-5">
+            <div class="container text-center  bg-light p-1 ">
+                <h1 class="i ip"> 
+                    Selecciona
+                </h1> 
+            </div>
+            <div class="container text-center p-3">
+                <h1 class="i ip"> 
+                    <a class="btn btn-primary pt-3 pb-3" href="{% url 'informe_produccion' %}" role="button">Informe de producción Alpina</a> 
+                </h1> 
+            </div>
+            <div class="container text-center p-3">
+                <h1 class="i ip"> 
+                    <a class="btn btn-primary pt-3 pb-3" href="{% url 'donaciones' %}" role="button">Informe de Donaciones Alpina</a> 
+                </h1> 
+            </div>
+        </div>
+        <div class="col-4 mt-5 center">
+            <img src="{% static 'alpinaApp/img/alpina_edificio.jpg'%}" height="200" alt="CoolBrand">
+        </div>
+    </div>
+    </div>
+  </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src= "{% static 'alpinaApp/js/bootstrap.min.js'%}"></script>
+</body>
+<html>

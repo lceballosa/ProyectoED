@@ -1,0 +1,203 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'alpinaApp/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'alpinaApp/css/principal.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cervello</title>
+    <link rel="icon" type="image/png" href="{% static 'alpinaApp/img/logo_alpina.png'%}" />
+  </head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-primary">
+        <a href="#" class="navbar">
+            <img src="{% static 'alpinaApp/img/logo_alpina.png'%}" height="45" alt="CoolBrand">
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="{% url 'principal' %}" class="nav-item nav-link ">Inicio</a>
+                <a href="{% url 'informe_produccion' %}" class="nav-item nav-link">Producción</a>
+                <a href="{% url 'donaciones' %}" class="nav-item nav-link">Donaciones</a>
+                <a href="https://www.alpina.com/recetas/recetas-alpina" class="nav-item nav-link">Tiendas Alpina</a>
+                <a href="https://www.alpina.com/tiendas-alpina/la-cabana-alpina" class="nav-item nav-link">Empleos</a>
+                <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a href="#" class="nav-item nav-link">Contacto</a>
+                <a href="{% url 'salida' %}" class="nav-item nav-link">Salir</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid text-center p-2 i ip bg-light mt-3 ">
+        <h1 class="i ip">
+            Informe producción año 2020
+        </h1>
+        <div class="row">
+            <div class="col-3 border border-primary text-center ml-5">
+                <h4 class="container-fluid text-center p-2  mt-3 bg-primary i ip btn-primary">
+                    Agregar Lote
+                </h4>
+                <form action="" method="POST"> 
+                {% csrf_token %}  
+                    <div class="form-group"> <!-- Full Name -->
+                            <label for="full_name_id" class="control-label">Fecha Lote</label>
+                            <input type="date" class="form-control i ip" id="full_name_id" name="fecha_lote" placeholder="DD/MM/AAAA">
+                    </div>            
+                    <div class="form-group"> <!-- Street 1 -->
+                            <label for="street1_id" class="control-label">Cuidad</label>
+                            <select class="form-control i ip" id="cuidad_" name="ciudad">
+                                <option value="Bog">Bogotá</option>
+                                <option value="Cal">Cali</option>
+                                <option value="Cart">Cartagena</option>
+                                <option value="Barr">Barranquilla</option>
+                                <option value="Med">Medellín</option>
+                                <option value="Cu">Cúcuta</option>
+                                <option value="Sant">Santa Marta</option>
+                                <option value="Mont">Montería</option>
+                                <option value="Gir">Girardot</option>
+                                <option value="Vall">Valledupar</option>
+                                <option value="Ar">Armenia</option>
+                                <option value="Man">Manizales</option>
+                                <option value="Pas">Pasto</option>
+                                <option value="Quib">Quibdó</option>
+                                <option value="Per">Pereira</option>
+                                <option value="Ibg">Ibagué</option>
+                                <option value="Vill">Villavicencio</option>
+                                <option value="Neiv">Neiva</option>
+                                <option value="Tunj">Tunja</option>
+                                <option value="Pop">Popayán</option>
+                                <option value="Rio">Riohacha</option>
+                                <option value="BuenaA">Buena Aventura</option>
+                            </select>                            
+                    </div>                                                                                                     
+                    <div class="form-group"> <!-- Street 2 -->
+                            <label for="street2_id" class="control-label">Código Producto</label>
+                            <input type="text" class="form-control i ip" id="codigo" name="codigo_producto" placeholder="Código">
+                    </div>  
+            
+                    <div class="form-group"> <!-- City-->
+                            <label for="city_id" class="control-label">Producto</label>
+                            <select class="form-control i ip" id="Producto" name="producto">
+                                    <option value="Alpinito">Alpinito</option>
+                                    <option value="Yogurt griego Fresa">Yogurt Griego fresa</option>
+                                    <option value="Yogogurt griego Maracuyá">Yogurt Griego Maracuyá</option>
+                                    <option value="Yogurt griego Coco">Yogurt Griego Coco</option>
+                                    <option value="Leche Deslactosada">Leche Deslactosada</option>
+                                    <option value="Leche Entera">Leche Entera</option>
+                                    <option value="Fruto Mago">Fruto mango</option>
+                                    <option value="Fruto Mora">Fruto mora</option>
+                                    <option value="Fruto Pera">Fruto pera </option>
+                                    <option value="Quesito">Quesito Alpina</option>
+                                    <option value="Crema Leche Finesse">Crema de leche light</option>
+                                    <option value="Crema Leche">Crema de leche</option>
+                                    <option value="Queso Parmesano">Queso Parmesano</option>
+                                    <option value="Litteral morado">Litteral morado</option>
+                                    <option value="litteral verde">Litteral Verde</option>
+                                    <option value="litteral amarillo">Litteral Amarillo</option>
+                            </select>
+                    </div>                                                                  
+                                                                    
+                    <div class="form-group"> <!-- State Button -->
+                            <label for="state_id" class="control-label i ip">Descripción</label>
+                            <input type="text" class="form-control i ip" id="descripcion" name="descrip_producto" placeholder="Descripción">     
+                    </div>
+                    
+                    <div class="form-group"> <!-- Zip Code-->
+                            <label for="zip_id" class="control-label">Fecha Vencimiento</label>
+                            <input type="date" class="form-control i ip" id="vencimiento" name="vencimiento" placeholder="DD/MM/AAAA">
+                    </div> 
+                    <div class="form-group"> <!-- Zip Code-->
+                        <label for="zip_id" class="control-label">Unidades</label>
+                        <input type="text" class="form-control i ip" id="unidades" name="unidades" placeholder="Cantidad">
+                    </div> 
+                <div class="form-group"> <!-- Zip Code-->
+                    <label for="zip_id" class="control-label">Costo Unitario</label>
+                    <input type="text" class="form-control i ip" id="costoU" name="costoU" placeholder="Valor">
+                 </div>
+                 <div class="form-group"> <!-- Zip Code-->
+                    <label for="zip_id" class="control-label">Costo Total</label>
+                    <input type="text" class="form-control i ip" id="costoT" name="costoT" placeholder="Valor">
+                 </div>      
+                    
+                    <div class="form-group"> <!-- Submit Button -->
+                            <button type="submit" name="agregar" class="btn btn-primary">Registrar</button>
+                    </div>                       
+            </form> 
+                     {% for message in messages %}
+                     <p id="messages">{{message}}
+                     {% endfor %}
+                    </p>        
+            </div>
+            <div class="col-5 mt-5 text-center">
+                <img src="/plot/" class="img-fluid" alt="Responsive image">
+                {% for message in messages %}
+                <p  class ="container i ip ml-4 text-center"id="messages">{{message}}
+                {% endfor %}
+                <a class="btn btn-primary pt-3 pb-3 ml-5 mt-3" href="{% url 'fecha_corta' %}" role="button">Ver informe Fecha Corta </a>                
+                <div class="container p-3 ml-1 mt-5 border border-light bg-primary">
+                    <h3 class="i ip btn-primary">
+                        COMPROMISO ALPINISTA
+                    </h3>
+                    <img src="{% static 'alpinaApp/img/alpina_cabaña.jpg'%}" class="img-fluid " alt="Responsive image">
+                    <p class="btn-primary">
+                        La nutrición y el bienestar de todos los colombianos es la razón por la cual trabajamos todos los días en Alpina. 
+                        Ahora que Colombia está atravesando por un momento sin precedentes, queremos ratificar nuestro compromiso con cada una
+                        de las personas que depositan su confianza en nosotros y que nos acompañan, 
+                        no sólo al consumir nuestros productos, sino al compartir experiencias en nuestros puntos de venta.
+                    </p>
+                </div>
+            </div>
+            <div class="col-3  text-center">
+                <div class="container fluid border border-primary"> 
+                <h4 class="container-fluid text-center p-2 mt-3 bg-primary i ip btn-primary">
+                    Actualizar Lote
+                </h4>
+                <form action="" method="POST">
+                {% csrf_token %} 
+                    <div class="form-group"> <!-- Zip Code-->
+                        <label for="zip_id" class="control-label">Código Producto</label>
+                        <input type="text" class="form-control i ip" id="code" name="codigo_act" placeholder="Código">
+                     </div>
+                     <div class="form-group"> <!-- Zip Code-->
+                        <label for="zip_id" class="control-label">Fecha Lote</label>
+                        <input type="date" class="form-control i ip" id="fecha_lote_act" name="fecha_act" placeholder="DD/MM/AAAA">
+                     </div> 
+                     <div class="form-group"> <!-- Zip Code-->
+                        <label for="zip_id" class="control-label">Cantidad</label>
+                        <input type="text" class="form-control i ip" id="cant" name="cantidad_act" placeholder="Cantidad">
+                     </div>                            
+                        <div class="form-group"> <!-- Submit Button -->
+                                <button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button>
+                        </div> 
+
+                </form>
+                {% for message in messages %}
+                <p id="messages">{{message}}
+                {% endfor %}
+                </p>  
+            </div>
+            <div class="mt-5">
+                <img src="{% static 'alpinaApp/img/alpina_alpinista.png'%}" class="img-fluid" alt="Responsive image"> 
+            </div>
+            <div class="container mt-3 border border-dark">
+                <h5 class="i ip text-primary mt-3">
+                    Líder Alpinista, recuerda registrarte en nuestra nueva plataforma "¡Soy Alpinista!" acá podrás acceder a las diferentes convocatorias, cursos y demás
+                    actividades donde podrás fortaleces tus habilidades y destrezas.
+
+                </h5>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src= "{% static 'alpinaApp/js/bootstrap.min.js'%}"></script>
+</body>
+<html>
