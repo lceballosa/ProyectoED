@@ -12,5 +12,6 @@ urlpatterns = [
     path('plot/', views.plot),
     #path('', views.inicio, name="home"),
     #path('kk/', views.kk)
+    path('contacto/',views.contacto ,name="contacto_usuario"),
 
 ]

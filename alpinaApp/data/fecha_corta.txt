@@ -1,3 +1,3 @@
-11/11/2020,928,alpinitox6,Alpinito,150.0,0
-11/11/2020,5555,alpinitox6,Alpinito,2.0,0
-12/11/2020,2016,alpinitox6,Alpinito,2000.0,0
+26/11/2020,54321,cajax6,litteral verde,20,1
+10/11/2020,4321,queso 4kg,Quesito,2.0,11
+27/11/2020,928,alpinito x6,Alpinito,209.0,2

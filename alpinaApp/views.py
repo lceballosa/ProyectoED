@@ -16,6 +16,31 @@ from .forms import OrderForm
 from random import sample
 from datetime import datetime 
 from datetime import date
+from django.core.mail import send_mail
+from django.conf import settings 
+####################################################################################################################################
+class HashMap:
+    def __init__(self):
+        self.size = 10000
+        self.map = [None] * self.size		
+    def _get_hash(self, key):
+    #se hace uso de la funcion hash universal para evitar así las coaliciones y teniendo en cuenta los valore de los productos
+        a=20
+        b=2
+        p=100003
+        hash=((a*key + b)%p )
+        return hash%10000		
+    def add(self, key, value):
+        key_hash = self._get_hash(key)
+        key_value = [key, value]
+        self.map[key_hash] = key_value
+        return True			
+    def get(self, key):
+        key_hash = self._get_hash(key)
+        if self.map[key_hash] is not None:
+            return self.map[key_hash]
+        else:
+            return False
 #####################################################################################################################################
 class TreeNode(object): 
     def __init__(self, val): 
@@ -398,6 +423,7 @@ archivo_2019='C:/Users/Laura Ceballos/Desktop/Proyecto ED/proyecto/alpinaApp/dat
 archivo_2018='C:/Users/Laura Ceballos/Desktop/Proyecto ED/proyecto/alpinaApp/data/2018.txt'
 archivo_2017='C:/Users/Laura Ceballos/Desktop/Proyecto ED/proyecto/alpinaApp/data/2017.txt'
 inventario=lista_enlazada()
+codigo_hash=HashMap()
 grafica=lista_enlazada()
 fecha_cort=lista_enlazada()
 cola_donaciones=colaPrioridad()
@@ -520,7 +546,8 @@ for line in open('C:/Users/Laura Ceballos/Desktop/Proyecto ED/proyecto/alpinaApp
         fechav_str=fechav_str[2]+"-"+fechav_str[1]+"-"+fechav_str[0]
         #Se crea la tupla con los datos y se agrega a la lista enlazada
         datos=[data[0], data[1],data[2],data[3],data[4],data[5],data[6],data[7],data[8],data[9]]
-        root=myTree.insert(root,datos) 
+        root=myTree.insert(root,datos)
+        codigo_hash.add(data[2], datos) 
 def actualizacion_BD_donaciones(lista):
     don=donaciones.objects.all().delete()
     for i in range(1,len(lista)):
@@ -563,18 +590,19 @@ def principal(request,raiz=root):
             codigo=request.POST.get("codigo")
             codigo=int(codigo)
             dato=myTree.buscar(raiz,codigo)
+            dato=codigo_hash.get(codigo)
             if  dato==False:
                 messages.info(request,"Producto No Encontrado")
             else:
-                if type(dato[0]) != str:
-                    dato[0] = dato[0].strftime('%d/%m/%Y')
-                messages.info(request, "Lote:  "+str(dato[0]))
-                messages.info(request, "Nombre:  "+str(dato[4]))
-                messages.info(request, "Descripción:  "+str(dato[3]))
-                if type(dato[5]) != str:
-                    dato[5] = dato[5].strftime('%d/%m/%Y')
-                messages.info(request, "Vencimiento:  "+str(dato[5]))
-                messages.info(request, "Cantidad:  "+str(dato[6]))
+                if type(dato[1][0]) != str:
+                    dato[1][0] = dato[1][0].strftime('%d/%m/%Y')
+                messages.info(request, "Lote:  "+str(dato[1][0]))
+                messages.info(request, "Nombre:  "+str(dato[1][4]))
+                messages.info(request, "Descripción:  "+str(dato[1][3]))
+                if type(dato[1][5]) != str:
+                    dato[1][5] = dato[1][5].strftime('%d/%m/%Y')
+                messages.info(request, "Vencimiento:  "+str(dato[1][5]))
+                messages.info(request, "Cantidad:  "+str(dato[1][6]))
         except:
             messages.error(request,"Ingrese Código")
 
@@ -766,3 +794,12 @@ def historial_(request):
         except:
             messages.error(request,"Ingrese datos")
     return render(request,"alpinaApp/historial.html")
+def contacto(request):
+    if (request.method=="POST"):
+        subject=request.POST.get("asunto")
+        message= str(request.POST.get("mensaje"))+" "+request.POST.get("email")
+        email_form=settings.EMAIL_HOST_USER
+        recipient_list=["lceballosa@unal.edu.co"]
+        send_mail(subject, message, email_form, recipient_list)
+        return render(request,"alpinaApp/principal.html")
+    return render(request,"alpinaApp/contacto.html")
